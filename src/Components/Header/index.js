@@ -7,7 +7,7 @@ class Header extends React.Component {
     return (
       <header className="header">
         <Link className="p" to="/" default >Student Workspace</Link>
-        <Link className="p" to="/ta-lounge">Settings</Link>
+        <Link className="p" to="/ta-lounge">TA Lounge</Link>
       </ header>
     );
   }
