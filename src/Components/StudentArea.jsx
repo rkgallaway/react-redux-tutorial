@@ -1,6 +1,8 @@
 import React from 'react';
 import pic from '../assets/student-area.png';
 import Ticket from './Ticket';
+import { removeTicket } from '../store/tickets';
+import { connect } from 'react-redux';
 
 const styles = {
   div: {
@@ -27,24 +29,10 @@ const styles = {
 }
 
 class StudentArea extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      tickets: [
-        {id: 123, name: 'Jo (they, them)', table: 1, topic: 'Salmon Cookies'},
-        {id: 456, name: 'Jo (she, her)', table: 2, topic: 'City Explorer'},
-        {id: 789, name: 'Jo (he, him)', table: 3, topic: 'Auth'}
-      ],
-    };
-  }
 
-  removeTicket = (id) => {
-    let remainingTickets = this.state.tickets.filter(ticket => ticket.id !== id);
-    this.setState({tickets: remainingTickets})
-  }
   render() {
-    const renderList = this.state.tickets.map(ticket => (
-      <Ticket ticket={ticket} removeTicket={this.removeTicket} />
+    const renderList = this.props.tickets.map(ticket => (
+      <Ticket ticket={ticket} removeTicket={this.props.removeTicket} />
     ))
     return (
       <div style={styles.div}>
@@ -62,4 +50,14 @@ class StudentArea extends React.Component {
   }
 }
 
-export default StudentArea;
+const mapStateToProps = (state) => {
+  return {
+    tickets: state.tickets
+  }
+};
+
+const mapDispatchToProps = {
+  removeTicket
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentArea);

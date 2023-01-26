@@ -1,6 +1,8 @@
 import React from 'react';
 import pic from '../assets/elizeu-dias-RN6ts8IZ4_0-unsplash.jpg';
 import Ticket from './Ticket';
+import { removeTicket } from '../store/tickets';
+import { connect } from 'react-redux';
 
 const styles = {
   div: {
@@ -27,21 +29,10 @@ const styles = {
 }
 
 class TaLounge extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      tickets: [
-      ],
-    };
-  }
 
-  removeTicket = (id) => {
-    let remainingTickets = this.state.tickets.filter(ticket => ticket.id !== id);
-    this.setState({tickets: remainingTickets})
-  }
   render() {
-    const renderList = this.state.tickets.map(ticket => (
-      <Ticket ticket={ticket} removeTicket={this.removeTicket} />
+    const renderList = this.props.tickets.map(ticket => (
+      <Ticket ticket={ticket} removeTicket={this.props.removeTicket} />
 
     ))
     return (
@@ -59,4 +50,14 @@ class TaLounge extends React.Component {
   }
 }
 
-export default TaLounge;
+const mapStateToProps = (state) => {
+  return {
+    tickets: state.tickets
+  }
+};
+
+const mapDispatchToProps = {
+  removeTicket
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaLounge);
