@@ -13,6 +13,8 @@ This repo exists to demonstrate the basic use of Redux within a React applicatio
 
 Feature One:
 
+
+- `npm i redux react-redux @redux-devtools/extension`
 - create a redux store
 - create a ticket reducer with initial state
 - functionality to remove a ticket from redux state
