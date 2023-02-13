@@ -10,6 +10,8 @@ const ticketsReducer = (state = initialState, action) => {
   switch(action.type){
     case 'REMOVE':
       return state.filter(ticket => ticket.id !== action.payload);
+    case 'ADD':
+      return [...state, action.payload];
     default:
       return state;
   }
@@ -21,6 +23,13 @@ export const removeTicket = (id) => {
   return {
     type: 'REMOVE',
     payload: id
+  }
+}
+
+export const addTicket = (ticket) => {
+  return {
+    type: 'ADD',
+    payload: ticket
   }
 }
 

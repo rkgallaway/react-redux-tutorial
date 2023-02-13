@@ -1,8 +1,8 @@
 import React from 'react';
 import pic from '../assets/student-area.png';
 import Ticket from './Ticket';
-import { removeTicket } from '../store/tickets';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import AddForm from './AddForm';
 
 const styles = {
   div: {
@@ -28,36 +28,27 @@ const styles = {
   }
 }
 
-class StudentArea extends React.Component {
+const StudentArea = (props) => {
+  const { tickets } = useSelector((reduxState) => reduxState);
+  
 
-  render() {
-    const renderList = this.props.tickets.map(ticket => (
-      <Ticket ticket={ticket} removeTicket={this.props.removeTicket} />
-    ))
-    return (
-      <div style={styles.div}>
-        <article style={styles.article}>
+  const renderList = tickets.map(ticket => (
+    <Ticket ticket={ticket} />
+  ))
+  return (
+    <div style={styles.div}>
+      <article style={styles.article}>
         <h1 style={styles.h1} >Collaboration Station</h1>
         <img style={styles.img} src={pic} alt="sunny beach" />
-        
-  
+
+
       </article>
       <article style={styles.article}>
         {renderList}
       </article>
-      </div >
-    );
-  }
+      <AddForm />
+    </div >
+  );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    tickets: state.tickets
-  }
-};
-
-const mapDispatchToProps = {
-  removeTicket
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(StudentArea);
+export default StudentArea;

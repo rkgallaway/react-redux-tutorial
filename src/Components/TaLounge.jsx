@@ -32,7 +32,7 @@ class TaLounge extends React.Component {
 
   render() {
     const renderList = this.props.tickets.map(ticket => (
-      <Ticket ticket={ticket} removeTicket={this.props.removeTicket} />
+      <Ticket ticket={ticket} />
 
     ))
     return (
